@@ -1,0 +1,12 @@
+dirs:
+  'rfds/**/index*':
+    tags: ['rfd']
+    when_modified:
+      file_patterns: ['${DIR}/*']
+
+workflows:
+  - tag_query: rfd
+    lock_policy: none
+    engine:
+      name: custom
+      plan: ['${TERRATEAM_ROOT}/bin/verify-status']

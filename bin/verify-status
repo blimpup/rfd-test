@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+
+if grep -qE '\:status\: (committed|abandonded)' index.*; then
+    echo "Mergable"
+else
+    echo "Does not have mergable status"
+    exit 1
