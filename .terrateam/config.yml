@@ -1,3 +1,6 @@
+when_modified:
+  file_patterns: []
+
 dirs:
   'rfds/**/index*':
     tags: ['rfd']
@@ -9,4 +12,13 @@ workflows:
     lock_policy: none
     engine:
       name: custom
-      plan: ['${TERRATEAM_ROOT}/bin/verify-status']
+      # If plan runs successfully, report no changes.  We are only really
+      # interested in the workflows section being called.
+      plan: ['bash', '-c', 'echo "{}" > $TERRATEAM_PLAN_FILE; exit 2']
+    plan:
+      - type: run
+        cmd: ['${TERRATEAM_ROOT}/bin/verify-status']
+      - type: plan
+
+cost_estimation:
+  enabled: false

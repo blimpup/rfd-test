@@ -1,8 +1,20 @@
 #! /usr/bin/env bash
 
-if grep -qE '\:status\: (committed|abandonded)' index.*; then
-    echo "Mergable"
-    exit 2
-else
-    echo "Does not have mergable status"
-    exit 1
+set -e
+
+if [[ -f 'index.adoc' ]]; then
+    if grep -qE '^\:status\: (committed|abandoned)$' index.adoc; then
+        echo "Mergable"
+    else
+        echo "Does not have mergable status"
+        exit 1
+    fi
+elif [[ -f 'index.md' ]]; then
+    if grep -qE '^status\: (committed|abandoned)$' index.md; then
+        echo "Mergable"
+    else
+        echo "Does not have mergable status"
+        exit 1
+    fi
+fi
+

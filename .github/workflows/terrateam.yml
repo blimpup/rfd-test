@@ -33,7 +33,7 @@
        - uses: actions/checkout@v4
        - name: Run Terrateam Action
          id: terrateam
-         uses: terrateamio/action@test-custom-engine-no-changes
+         uses: terrateamio/action@532-add-detailed-exit-to-custom-engine
          with:
            work-token: '${{ github.event.inputs.work-token }}'
            api-base-url: '${{ github.event.inputs.api-base-url }}'
